@@ -8,21 +8,21 @@ import hr.fer.zemris.java.tecaj_14.dao.sql.SQLDAO;
  * hardkodirana, naziv razreda koji se stvara mogli smo dinamički pročitati iz
  * konfiguracijske datoteke i dinamički učitati -- time bismo implementacije
  * mogli mijenjati bez ikakvog ponovnog kompajliranja koda.
- * 
+ *
  * @author marcupic
  */
 public class DAOProvider {
 
-	/** Dao singleton objekt. */
-	private static DAO dao = new SQLDAO();
+    /** Dao singleton objekt. */
+    private static DAO dao = new SQLDAO();
 
-	/**
-	 * Dohvat primjerka.
-	 * 
-	 * @return objekt koji enkapsulira pristup sloju za perzistenciju podataka.
-	 */
-	public static DAO getDao() {
-		return dao;
-	}
+    /**
+     * Dohvat primjerka.
+     *
+     * @return objekt koji enkapsulira pristup sloju za perzistenciju podataka.
+     */
+    public static DAO getDao() {
+        return dao;
+    }
 
 }

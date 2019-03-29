@@ -5,10 +5,10 @@
                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   version="3.0"
   metadata-complete="false">
-  
+
   <display-name>HW14-0036484942</display-name>
   <description>
-     14th homework assignment; JAVA, Academic year 2015/2016; FER
+    14th homework assignment; JAVA, Academic year 2015/2016; FER
   </description>
 
 </web-app>

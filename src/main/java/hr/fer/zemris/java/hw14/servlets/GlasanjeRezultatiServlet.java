@@ -23,49 +23,49 @@ import hr.fer.zemris.java.tecaj_14.dao.DAOProvider;
  */
 @WebServlet(name="glasanje-rezultati", urlPatterns={"/glasanje-rezultati"})
 public class GlasanjeRezultatiServlet extends HttpServlet {
-	/** Serialization UID. */
-	private static final long serialVersionUID = 1L;
+    /** Serialization UID. */
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		long pollID;
-		try {
-			pollID = Long.parseLong(req.getParameter("pollID"));
-		} catch (NumberFormatException e) {
-			req.setAttribute("error", "Poll ID must be a valid integer!");
-			req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req, resp);
-			return;
-		}
-		
-		
-		List<Info> infoList = DAOProvider.getDao().getInfoList(pollID);
-		infoList.sort(Info.BY_VOTES);
-		
-		List<Info> winners = getWinners(infoList);
-		
-		req.setAttribute("pollID", pollID);
-		req.setAttribute("infoList", infoList);
-		req.setAttribute("winners", winners);
-		req.getRequestDispatcher("/WEB-INF/pages/votingResults.jsp").forward(req, resp);
-	}
-	
-	/**
-	 * Returns a <tt>List</tt> of {@linkplain Info} objects containing only
-	 * winners of the pole. The maximum number of votes an information object
-	 * has is calculated based on the votes in <tt>infoList</tt> list, which
-	 * <strong>must</strong> be sorted before passing it to this method.
-	 * 
-	 * @param infoList info list, <strong>must</strong> be sorted
-	 * @return a list containing winners of the pole
-	 */
-	private static List<Info> getWinners(List<Info> infoList) {
-		long maxVotes = infoList.isEmpty() ? 0L : infoList.get(0).getVotes();
-		
-		List<Info> winners = new ArrayList<>();
-		winners.addAll(infoList);
-		winners.removeIf(bandInfo -> bandInfo.getVotes() < maxVotes);
-		
-		return winners;
-	}
-	
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        long pollID;
+        try {
+            pollID = Long.parseLong(req.getParameter("pollID"));
+        } catch (NumberFormatException e) {
+            req.setAttribute("error", "Poll ID must be a valid integer!");
+            req.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(req, resp);
+            return;
+        }
+
+
+        List<Info> infoList = DAOProvider.getDao().getInfoList(pollID);
+        infoList.sort(Info.BY_VOTES);
+
+        List<Info> winners = getWinners(infoList);
+
+        req.setAttribute("pollID", pollID);
+        req.setAttribute("infoList", infoList);
+        req.setAttribute("winners", winners);
+        req.getRequestDispatcher("/WEB-INF/pages/votingResults.jsp").forward(req, resp);
+    }
+
+    /**
+     * Returns a <tt>List</tt> of {@linkplain Info} objects containing only
+     * winners of the pole. The maximum number of votes an information object
+     * has is calculated based on the votes in <tt>infoList</tt> list, which
+     * <strong>must</strong> be sorted before passing it to this method.
+     *
+     * @param infoList info list, <strong>must</strong> be sorted
+     * @return a list containing winners of the pole
+     */
+    private static List<Info> getWinners(List<Info> infoList) {
+        long maxVotes = infoList.isEmpty() ? 0L : infoList.get(0).getVotes();
+
+        List<Info> winners = new ArrayList<>();
+        winners.addAll(infoList);
+        winners.removeIf(bandInfo -> bandInfo.getVotes() < maxVotes);
+
+        return winners;
+    }
+
 }

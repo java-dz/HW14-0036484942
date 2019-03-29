@@ -24,35 +24,35 @@ import javax.sql.DataSource;
  */
 @WebFilter(filterName="connectionSetter",urlPatterns={"/*"})
 public class ConnectionSetterFilter implements Filter {
-	
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-	}
-	
-	@Override
-	public void destroy() {
-	}
-	
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		
-		DataSource ds = (DataSource)request.getServletContext().getAttribute("hr.fer.zemris.dbpool");
-		Connection con = null;
-		
-		try {
-			con = ds.getConnection();
-		} catch (SQLException e) {
-			throw new IOException("Database unavailable.", e);
-		}
-		SQLConnectionProvider.setConnection(con);
-		
-		try {
-			chain.doFilter(request, response);
-		} finally {
-			SQLConnectionProvider.setConnection(null);
-			try { con.close(); } catch (SQLException ignorable) {}
-		}
-	}
-	
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
+    public void destroy() {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException {
+
+        DataSource ds = (DataSource)request.getServletContext().getAttribute("hr.fer.zemris.dbpool");
+        Connection con = null;
+
+        try {
+            con = ds.getConnection();
+        } catch (SQLException e) {
+            throw new IOException("Database unavailable.", e);
+        }
+        SQLConnectionProvider.setConnection(con);
+
+        try {
+            chain.doFilter(request, response);
+        } finally {
+            SQLConnectionProvider.setConnection(null);
+            try { con.close(); } catch (SQLException ignorable) {}
+        }
+    }
+
 }

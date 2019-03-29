@@ -10,24 +10,24 @@
   <body>
     <h1>Rezultati glasanja</h1>
     <p>Ovo su rezultati glasanja.</p>
-    
+
     <table border="1" class="rez" style="border-spacing: 0">
       <thead><tr><th>Naslov</th><th>Broj glasova</th></tr></thead>
       <tbody>
-      
+
       <c:forEach var="info" items="${infoList}">
         <tr><td>${info.name}</td><td>${info.votes}</td></tr>
       </c:forEach>
-      
+
       </tbody>
     </table>
-    
+
     <h2>Grafički prikaz rezultata</h2>
     <img alt="Pie-chart" src="glasanje-grafika?pollID=<%= request.getAttribute("pollID") %>" />
-    
+
     <h2>Rezultati u XLS formatu</h2>
     <p>Rezultati u XLS formatu dostupni su <a href="glasanje-xls?pollID=<%= request.getAttribute("pollID") %>">ovdje</a></p>
-    
+
     <h2>Razno</h2>
     <p>Linkovi pobjednika:</p>
     <ul>

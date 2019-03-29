@@ -19,15 +19,15 @@ import hr.fer.zemris.java.tecaj_14.dao.DAOProvider;
  */
 @WebServlet(name="index", urlPatterns={"/index.html", "/"})
 public class IndexServlet extends HttpServlet {
-	/** Serialization UID. */
-	private static final long serialVersionUID = 1L;
+    /** Serialization UID. */
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Poll> pollList = DAOProvider.getDao().getPollList();
-		
-		req.setAttribute("pollList", pollList);
-		req.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(req, resp);
-	}
-	
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Poll> pollList = DAOProvider.getDao().getPollList();
+
+        req.setAttribute("pollList", pollList);
+        req.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(req, resp);
+    }
+
 }
